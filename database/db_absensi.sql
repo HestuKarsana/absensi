@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2020 at 05:56 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Generation Time: Aug 17, 2021 at 06:24 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -41,11 +40,67 @@ CREATE TABLE `absensi` (
 --
 
 INSERT INTO `absensi` (`id_absen`, `tgl`, `waktu`, `keterangan`, `id_user`) VALUES
-(4, '2019-07-25', '07:21:53', 'Masuk', 6),
-(5, '2019-07-26', '09:00:47', 'Masuk', 6),
-(6, '2019-07-26', '16:01:03', 'Pulang', 6),
-(7, '2019-07-25', '17:01:28', 'Pulang', 6),
-(8, '2020-10-23', '22:18:36', 'Masuk', 13);
+(93, '2021-08-01', '07:20:13', 'Masuk', 15),
+(94, '2021-08-01', '16:00:12', 'Pulang', 15),
+(95, '2021-08-02', '07:20:13', 'Masuk', 15),
+(96, '2021-08-02', '16:00:00', 'Pulang', 15),
+(97, '2021-08-03', '07:20:13', 'Masuk', 15),
+(98, '2021-08-03', '16:00:12', 'Pulang', 15),
+(99, '2021-08-04', '07:20:13', 'Masuk', 15),
+(100, '2021-08-04', '16:00:12', 'Pulang', 15),
+(101, '2021-08-05', '07:20:13', 'Masuk', 15),
+(102, '2021-08-05', '16:00:12', 'Pulang', 15),
+(103, '2021-08-06', '07:20:13', 'Masuk', 15),
+(104, '2021-08-06', '16:00:12', 'Pulang', 15),
+(107, '2021-08-09', '07:20:13', 'Masuk', 15),
+(108, '2021-08-09', '16:00:12', 'Pulang', 15),
+(109, '2021-08-10', '07:20:13', 'Masuk', 15),
+(110, '2021-08-10', '16:00:12', 'Pulang', 15),
+(112, '2021-08-11', '07:20:13', 'Masuk', 15),
+(113, '2021-08-11', '16:00:12', 'Pulang', 15),
+(114, '2021-08-01', '07:20:13', 'Masuk', 16),
+(115, '2021-08-01', '16:00:12', 'Pulang', 16),
+(116, '2021-08-02', '07:20:13', 'Masuk', 16),
+(117, '2021-08-02', '16:00:00', 'Pulang', 16),
+(118, '2021-08-03', '07:20:13', 'Masuk', 16),
+(119, '2021-08-03', '16:00:12', 'Pulang', 16),
+(120, '2021-08-04', '07:20:13', 'Masuk', 16),
+(121, '2021-08-04', '16:00:12', 'Pulang', 16),
+(122, '2021-08-05', '07:20:13', 'Masuk', 16),
+(123, '2021-08-05', '16:00:12', 'Pulang', 16),
+(124, '2021-08-06', '07:20:13', 'Masuk', 16),
+(125, '2021-08-06', '16:00:12', 'Pulang', 16),
+(126, '2021-08-09', '07:20:13', 'Masuk', 16),
+(127, '2021-08-09', '16:00:12', 'Pulang', 16),
+(128, '2021-08-10', '07:20:13', 'Masuk', 16),
+(129, '2021-08-10', '16:00:12', 'Pulang', 16),
+(134, '2021-08-16', '10:22:24', 'Masuk', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `absen_masuk`
+-- (See below for the actual view)
+--
+CREATE TABLE `absen_masuk` (
+`id_user` int(11)
+,`id_absen` int(11)
+,`tgl` date
+,`waktu` time
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `absen_pulang`
+-- (See below for the actual view)
+--
+CREATE TABLE `absen_pulang` (
+`id_user` int(11)
+,`id_absen` int(11)
+,`tgl` date
+,`waktu` time
+);
 
 -- --------------------------------------------------------
 
@@ -87,8 +142,80 @@ CREATE TABLE `jam` (
 --
 
 INSERT INTO `jam` (`id_jam`, `start`, `finish`, `keterangan`) VALUES
-(1, '07:00:00', '07:45:00', 'Masuk'),
+(1, '06:30:00', '08:00:00', 'Masuk'),
 (2, '16:00:00', '16:45:00', 'Pulang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perhitungan_gaji`
+--
+
+CREATE TABLE `perhitungan_gaji` (
+  `id_gaji` int(11) NOT NULL,
+  `bulan` varchar(15) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `total_hadir` int(11) NOT NULL,
+  `total_gaji` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `rekap_absensi`
+-- (See below for the actual view)
+--
+CREATE TABLE `rekap_absensi` (
+`tgl` date
+,`id_user` smallint(5)
+,`nama` varchar(50)
+,`masuk` time
+,`pulang` time
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `rekap_bulan`
+-- (See below for the actual view)
+--
+CREATE TABLE `rekap_bulan` (
+`bulan` varchar(2)
+,`tahun` varchar(4)
+,`id_user` smallint(5)
+,`nama` varchar(50)
+,`jumlah_hadir` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `rekap_count`
+-- (See below for the actual view)
+--
+CREATE TABLE `rekap_count` (
+`id_user` smallint(5)
+,`nama` varchar(50)
+,`divisi` varchar(255)
+,`masuk` bigint(21)
+,`pulang` bigint(21)
+,`bulan` varchar(2)
+,`tahun` varchar(4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `rekap_diterima`
+-- (See below for the actual view)
+--
+CREATE TABLE `rekap_diterima` (
+`id_user` smallint(5)
+,`nama` varchar(50)
+,`persen_hadir` decimal(26,2)
+,`uang_diterima` bigint(28)
+);
 
 -- --------------------------------------------------------
 
@@ -103,7 +230,7 @@ CREATE TABLE `users` (
   `telp` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `foto` varchar(20) DEFAULT 'no-foto.png',
-  `divisi` smallint(5) DEFAULT NULL,
+  `divisi` varchar(255) DEFAULT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(60) NOT NULL,
   `level` enum('Manager','Karyawan') NOT NULL DEFAULT 'Karyawan'
@@ -114,14 +241,72 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `nik`, `nama`, `telp`, `email`, `foto`, `divisi`, `username`, `password`, `level`) VALUES
-(1, '12312312332123', 'Ahmad Fadillah 1', '08139212092', 'ahm.fadil@mail.com', '1564316194.png', NULL, 'ahmad', '$2y$10$UwqloCX7PFLM3aQvgQxh6e9UgifqwQOZiF1zdogtLF6iVDR7Yr7IW', 'Manager'),
-(6, '123456789101112', 'Anissa Rahma', '08151231902', 'anissa.rhm31@mail.com', '1564293217.png', 1, 'anissa', '$2y$10$2kexYaZKVXX/5Liljm2FXO0Zk7BI5LUQgOTz1bRIf211eraxpju2a', 'Karyawan'),
-(7, '1231231231231123', 'Willy', '081231238', 'willy@mail.com', 'no-foto.png', 2, 'willy', '$2y$10$zGwtkQ8uCLBCmXEbPjJWF.vZkVlf7nmxhbe9iYu08wE8qkJNPdMb.', 'Karyawan'),
+(1, '12312312332123', 'Ahmad Fadillah 1', '08139212092', 'ahm.fadil@mail.com', '1564316194.png', NULL, 'hestu', '$2y$10$2kexYaZKVXX/5Liljm2FXO0Zk7BI5LUQgOTz1bRIf211eraxpju2a', 'Manager'),
 (8, '8931289124891', 'Manager 1', '', '', 'no-foto.png', NULL, 'manager_1', '$2y$10$XtMY01KEOd5I065s8Exs0OcQ373RvRNG1JznORr6TmmBNWnZ3vjjK', 'Manager'),
 (9, '1231231238900', 'Manager 2', '', '', 'no-foto.png', NULL, 'manager_2', '$2y$10$iJWUOXDznGEmxo.bqnhtmeFL51jN5130LfDlKg8VROfoEmlgC.cFW', 'Manager'),
 (10, '908121310291', 'Manager 3', '', '', 'no-foto.png', NULL, 'manager_3', '$2y$10$uGsLvgl.6ji2iZ7tWkNvPelTwZdLQ6QA81Yawa20wsLairCXqV8BO', 'Manager'),
 (11, '123801204012', 'Manager 4', '', '', 'no-foto.png', NULL, 'master_4', '$2y$10$Kot81WNqrho4WlcYI13kT.Y5V2sMg1ZSAXcITrp8cj3dqHpbl4vrS', 'Manager'),
-(13, '202010765341', 'RAJA PUTRA MEDIA', '082137801536', 'rajaputramedia@gmail.com', '1603466299.png', 2, 'raja', '$2y$10$TUMbb787RN.ML.Z65ZFuDuaGRqi..c.5YdJp/AseHzmvf9NFd6nMG', 'Karyawan');
+(15, '1241423412', 'Fajar Maulana Ichsan', '08886004588', 'hestu@gmail.com', 'no-foto.png', 'Pengelola Administrasi Umum Pada Sub Bagian Umum dan Kepegawain', '123456', '$2y$10$LtkYczZUAhhkWzBb8Ih9J.tsahU6RA0iiAkeomQIjMY/LsCQ5IWnS', 'Karyawan'),
+(16, '12312312412412421', 'Rani Apriliani', '0811261842684', 'aceng@gmail.com', 'no-foto.png', 'Pengelola Bantuan Keuangan pada Pemdes Seksi Pemerintahan', '123457', '$2y$10$kG8hCEuFXVu39YGOZI.hs.u4PGWLqPnAbcG7t3iF9zrvFfQsgZ.di', 'Karyawan'),
+(17, '12312312', 'Hani Nur Haningsih', '0811261842684', 'aceng@gmail.com', 'no-foto.png', 'Pengelola Pengendalian Monitoring dan Evaluasi pada Seksi Pembangunan', '123458', '$2y$10$kG8hCEuFXVu39YGOZI.hs.u4PGWLqPnAbcG7t3iF9zrvFfQsgZ.di', 'Karyawan'),
+(18, '34564574574', 'Ayi Muhammad Cahri', '0811261842684', 'aceng@gmail.com', 'no-foto.png', 'Pengelola Fasilitas Sosial dan Umum pada Seksi Sosial Budaya', '123459', '$2y$10$kG8hCEuFXVu39YGOZI.hs.u4PGWLqPnAbcG7t3iF9zrvFfQsgZ.di', 'Karyawan'),
+(19, '54534523', 'Yayan T Kurniawan', '0811261842684', 'aceng@gmail.com', 'no-foto.png', 'Pengelola Layana Opersional pada Sub Bagian Umum dan Kepegawaian', '1234510', '$2y$10$kG8hCEuFXVu39YGOZI.hs.u4PGWLqPnAbcG7t3iF9zrvFfQsgZ.di', 'Karyawan'),
+(20, '23214215', 'Mia Hildayanti', '0811261842684', 'aceng@gmail.com', 'no-foto.png', 'Pengelola Kesejahteraan Sosial pada Seksi Sosial Budaya', '1234511', '$2y$10$kG8hCEuFXVu39YGOZI.hs.u4PGWLqPnAbcG7t3iF9zrvFfQsgZ.di', 'Karyawan'),
+(21, '8679769', 'Agus Budianto', '0811261842684', 'aceng@gmail.com', 'no-foto.png', 'Pengelola Data pada Seksi Pemberdayaan Masyarakat', '1234512', '$2y$10$kG8hCEuFXVu39YGOZI.hs.u4PGWLqPnAbcG7t3iF9zrvFfQsgZ.di', 'Karyawan');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `absen_masuk`
+--
+DROP TABLE IF EXISTS `absen_masuk`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `absen_masuk`  AS SELECT `a`.`id_user` AS `id_user`, `a`.`id_absen` AS `id_absen`, `a`.`tgl` AS `tgl`, `a`.`waktu` AS `waktu` FROM `absensi` AS `a` WHERE `a`.`keterangan` = 'masuk' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `absen_pulang`
+--
+DROP TABLE IF EXISTS `absen_pulang`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `absen_pulang`  AS SELECT `a`.`id_user` AS `id_user`, `a`.`id_absen` AS `id_absen`, `a`.`tgl` AS `tgl`, `a`.`waktu` AS `waktu` FROM `absensi` AS `a` WHERE `a`.`keterangan` = 'pulang' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `rekap_absensi`
+--
+DROP TABLE IF EXISTS `rekap_absensi`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rekap_absensi`  AS SELECT `am`.`tgl` AS `tgl`, `u`.`id_user` AS `id_user`, `u`.`nama` AS `nama`, `am`.`waktu` AS `masuk`, `ap`.`waktu` AS `pulang` FROM ((`absen_masuk` `am` join `absen_pulang` `ap` on(`am`.`tgl` = `ap`.`tgl`)) join `users` `u` on(`am`.`id_user` = `u`.`id_user` and `ap`.`id_user` = `u`.`id_user`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `rekap_bulan`
+--
+DROP TABLE IF EXISTS `rekap_bulan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rekap_bulan`  AS SELECT DISTINCT date_format(`ra`.`tgl`,'%m') AS `bulan`, date_format(`ra`.`tgl`,'%Y') AS `tahun`, `ra`.`id_user` AS `id_user`, `ra`.`nama` AS `nama`, (select count(`rekap_absensi`.`tgl`) from `rekap_absensi` where `rekap_absensi`.`nama` = `ra`.`nama`) AS `jumlah_hadir` FROM `rekap_absensi` AS `ra` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `rekap_count`
+--
+DROP TABLE IF EXISTS `rekap_count`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rekap_count`  AS SELECT DISTINCT `u`.`id_user` AS `id_user`, `u`.`nama` AS `nama`, `u`.`divisi` AS `divisi`, (select count(`ra2`.`masuk`) from `rekap_absensi` `ra2` where `ra2`.`id_user` = `u`.`id_user`) AS `masuk`, (select count(`ra2`.`pulang`) from `rekap_absensi` `ra2` where `ra2`.`id_user` = `u`.`id_user`) AS `pulang`, ifnull(date_format(`a`.`tgl`,'%m'),date_format(current_timestamp(),'%m')) AS `bulan`, ifnull(date_format(`a`.`tgl`,'%Y'),date_format(current_timestamp(),'%Y')) AS `tahun` FROM ((`users` `u` left join `absensi` `a` on(`u`.`id_user` = `a`.`id_user`)) left join `rekap_absensi` `ra` on(`u`.`id_user` = `ra`.`id_user`)) WHERE `u`.`level` = 'karyawan' ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `rekap_diterima`
+--
+DROP TABLE IF EXISTS `rekap_diterima`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rekap_diterima`  AS SELECT `rb`.`id_user` AS `id_user`, `rb`.`nama` AS `nama`, round(`rb`.`jumlah_hadir` / 20 * 100,2) AS `persen_hadir`, 2250000 - (20 - `rb`.`jumlah_hadir`) * 11250 AS `uang_diterima` FROM `rekap_bulan` AS `rb` ;
 
 --
 -- Indexes for dumped tables
@@ -146,6 +331,12 @@ ALTER TABLE `jam`
   ADD PRIMARY KEY (`id_jam`);
 
 --
+-- Indexes for table `perhitungan_gaji`
+--
+ALTER TABLE `perhitungan_gaji`
+  ADD PRIMARY KEY (`id_gaji`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -159,7 +350,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `divisi`
@@ -174,10 +365,16 @@ ALTER TABLE `jam`
   MODIFY `id_jam` tinyint(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `perhitungan_gaji`
+--
+ALTER TABLE `perhitungan_gaji`
+  MODIFY `id_gaji` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
