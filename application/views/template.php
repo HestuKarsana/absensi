@@ -60,12 +60,12 @@
                             <p>Daftar Gaji</p>
                         </a>
                     </li>
-                    <li class="nav-item <?= @$_active ?>">
+                    <!-- <li class="nav-item <?= @$_active ?>">
                         <a class="nav-link" href="<?= base_url('gaji') ?>">
                             <i class="nc-icon nc-single-copy-04"></i>
                             <p>Kelengkapan<br> Dokumen</p>
                         </a>
-                    </li>
+                    </li> -->
                     <?php else: ?>
                         <li class="nav-item <?= @$_active ?>">
                             <a class="nav-link" href="<?= base_url('absensi/check_absen') ?>">
